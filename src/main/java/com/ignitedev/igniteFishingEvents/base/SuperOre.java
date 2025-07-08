@@ -9,8 +9,6 @@ import lombok.Data;
 import org.bukkit.*;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.Random;
-
 @Data
 public class SuperOre {
 
@@ -18,8 +16,6 @@ public class SuperOre {
 
   private final Location location;
   private final Material type;
-  private final int min;
-  private final int max;
 
   private int particleTaskId;
 
