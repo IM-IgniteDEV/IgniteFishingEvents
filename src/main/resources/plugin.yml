@@ -1,0 +1,4 @@
+name: IgniteFishingEvents
+version: '1.0.0'
+main: com.ignitedev.igniteFishingEvents.IgniteFishingEvents
+api-version: '1.21'
