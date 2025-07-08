@@ -3,8 +3,10 @@ package com.ignitedev.igniteFishingEvents.listener;
 import com.ignitedev.aparecium.util.EntityUtility;
 import com.ignitedev.igniteFishingEvents.base.FishingEvent;
 import com.ignitedev.igniteFishingEvents.config.FishingEventsConfiguration;
+import com.ignitedev.igniteFishingEvents.event.WaterHookEvent;
 import com.ignitedev.igniteFishingEvents.util.CrazyZombieUtility;
 import com.twodevsstudio.simplejsonconfig.interfaces.Autowired;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.World;
@@ -14,6 +16,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerFishEvent;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.util.Vector;
 
 import java.time.LocalDateTime;
@@ -24,6 +27,7 @@ public class PlayerFishingListener implements Listener {
   @Autowired private static FishingEventsConfiguration configuration;
 
   private final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+  private final PluginManager pluginManager = Bukkit.getPluginManager();
 
   @EventHandler
   public void onFishing(PlayerFishEvent event) {
@@ -77,6 +81,7 @@ public class PlayerFishingListener implements Listener {
     if (ThreadLocalRandom.current().nextDouble() <= fishingEvent.getWaterHookChance()) {
       player.setVelocity(
           player.getLocation().getDirection().multiply(configuration.getWaterHookPower()));
+      pluginManager.callEvent(new WaterHookEvent(player));
     }
   }
 }
