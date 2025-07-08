@@ -22,6 +22,6 @@ public class SuperOreBreakListener implements Listener {
       return;
     }
     event.setCancelled(true);
-    superOre.deleteOre(repository);
+    superOre.deleteOre(event.getPlayer(), repository);
   }
 }

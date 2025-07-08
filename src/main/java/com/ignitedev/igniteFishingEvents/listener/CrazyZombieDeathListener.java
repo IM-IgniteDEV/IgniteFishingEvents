@@ -47,7 +47,7 @@ public class CrazyZombieDeathListener implements Listener {
       if (!configuration.getSuperOreMaterials().contains(type)) {
         return;
       }
-      new SuperOre(oreSpawnLocation, type).spawnOre(plugin, repository);
+      new SuperOre(oreSpawnLocation, type).spawnOre(entity, plugin, repository);
     }
   }
 }
