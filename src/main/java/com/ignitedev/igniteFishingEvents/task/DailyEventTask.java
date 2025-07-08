@@ -36,7 +36,7 @@ public class DailyEventTask {
       DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
 
       Bukkit.broadcastMessage(
-          TextUtility.colorize(
+          TextUtility.colorize(configuration.getPrefix() +
               configuration
                   .getNewEventDay()
                   .replace(
