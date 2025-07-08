@@ -71,7 +71,7 @@ public class PlayerFishingListener implements Listener {
       Vector waterToPlayer = to.subtract(from);
 
       CrazyZombieUtility.spawnZombie(
-          location, world, waterToPlayer.multiply(configuration.getCrazyZombieHookPower()));
+          player, location, world, waterToPlayer.multiply(configuration.getCrazyZombieHookPower()));
       player.playSound(player.getLocation(), configuration.getCrazyZombieSpawnSound(), 1, 1);
 
       if (!fishingEvent.isMultipleActions()) {
