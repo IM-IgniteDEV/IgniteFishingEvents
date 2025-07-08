@@ -5,6 +5,7 @@ import com.ignitedev.igniteFishingEvents.listener.CrazyZombieProtectListener;
 import com.ignitedev.igniteFishingEvents.listener.PlayerFishingListener;
 import com.ignitedev.igniteFishingEvents.listener.SuperOreBreakListener;
 import com.ignitedev.igniteFishingEvents.repository.SuperOreRepository;
+import com.ignitedev.igniteFishingEvents.task.DailyEventTask;
 import com.twodevsstudio.simplejsonconfig.SimpleJSONConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -19,6 +20,8 @@ public final class IgniteFishingEvents extends JavaPlugin {
     SuperOreRepository superOreRepository = new SuperOreRepository();
 
     loadListeners(Bukkit.getPluginManager(), superOreRepository);
+
+    new DailyEventTask();
   }
 
   @Override
