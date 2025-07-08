@@ -1,8 +1,6 @@
 package com.ignitedev.igniteFishingEvents.config;
 
-import com.ignitedev.aparecium.item.basic.DropItem;
 import com.ignitedev.igniteFishingEvents.base.FishingEvent;
-import com.ignitedev.igniteFishingEvents.base.SuperOre;
 import com.twodevsstudio.simplejsonconfig.api.Config;
 import com.twodevsstudio.simplejsonconfig.interfaces.Comment;
 import com.twodevsstudio.simplejsonconfig.interfaces.Configuration;
@@ -15,6 +13,7 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.time.DayOfWeek;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -77,5 +76,49 @@ public class FishingEventsConfiguration extends Config {
               0.1,
               0.9,
               true,
-              Map.of(1, new ItemStack(Material.DIAMOND), 5, new ItemStack(Material.DIRT))));
+              Map.of(1, new ItemStack(Material.DIAMOND), 5, new ItemStack(Material.DIRT))),
+          DayOfWeek.TUESDAY,
+          new FishingEvent(
+              "Day 2 - Diamond day!",
+              1.0,
+              0.8,
+              0.1,
+              0.1,
+              0.1,
+              true,
+              Map.of(10, new ItemStack(Material.DIAMOND), 5, new ItemStack(Material.DIRT))),
+          DayOfWeek.WEDNESDAY,
+          new FishingEvent(
+              "Day 3 - Normal day!",
+              0.5,
+              0.1,
+              0.1,
+              0.1,
+              0.1,
+              true,
+              Map.of(1, new ItemStack(Material.DIAMOND), 5, new ItemStack(Material.DIRT))),
+          DayOfWeek.THURSDAY,
+          new FishingEvent(
+              "Day 4 - Mega day!",
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              true,
+              Map.of(10, new ItemStack(Material.DIAMOND), 5, new ItemStack(Material.DIRT))),
+          DayOfWeek.FRIDAY,
+          new FishingEvent(
+              "Day 5 - Weekend Start!",
+              0.2,
+              1.0,
+              1.0,
+              1.0,
+              1.0,
+              true,
+              Map.of(100, new ItemStack(Material.DIAMOND, 10), 5, new ItemStack(Material.DIRT))),
+          DayOfWeek.SATURDAY,
+          new FishingEvent("Day 6 - No event day!", 0, 1.0, 1.0, 1.0, 1.0, true, new HashMap<>()),
+          DayOfWeek.SUNDAY,
+          new FishingEvent("Day 7 - No event day!", 0, 1.0, 1.0, 1.0, 1.0, true, new HashMap<>()));
 }
