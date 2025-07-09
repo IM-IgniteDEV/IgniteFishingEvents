@@ -45,7 +45,8 @@ Make fishing finally somehow funny and interesting with powerful events.
 
 ## Preview:
 
-You can watch the preview video right [here](https://www.youtube.com/watch?v=b8I60z7VEn4)!  (Old Video, this is refreshed version but the concept is the same)
+You can watch the preview video right [here](https://www.youtube.com/watch?v=b8I60z7VEn4)!  (Old Video, this is
+refreshed version but the concept is the same)
 
 ---
 
@@ -221,9 +222,10 @@ You can watch the preview video right [here](https://www.youtube.com/watch?v=b8I
   }
 }
 ```
----
-## API Usage
 
+---
+
+## API Usage
 
 ---
 
@@ -232,7 +234,6 @@ You can watch the preview video right [here](https://www.youtube.com/watch?v=b8I
 ---
 
 ## Events
-
 
 ---
 

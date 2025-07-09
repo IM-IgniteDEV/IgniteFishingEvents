@@ -33,7 +33,8 @@ public class CrazyZombieUtility {
 
   private final PluginManager pluginManager = Bukkit.getPluginManager();
 
-  public void spawnZombie(Player causePlayer, Location location, World world, Vector reverseVelocity) {
+  public void spawnZombie(
+      Player causePlayer, Location location, World world, Vector reverseVelocity) {
 
     Zombie babyZombie = ((Zombie) world.spawnEntity(location, EntityType.ZOMBIE));
     EntityEquipment equipment = babyZombie.getEquipment();

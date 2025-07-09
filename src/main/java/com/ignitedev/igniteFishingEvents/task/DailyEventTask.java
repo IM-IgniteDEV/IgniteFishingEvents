@@ -36,12 +36,13 @@ public class DailyEventTask {
       DayOfWeek dayOfWeek = LocalDateTime.now().getDayOfWeek();
 
       Bukkit.broadcastMessage(
-          TextUtility.colorize(configuration.getPrefix() +
-              configuration
-                  .getNewEventDay()
-                  .replace(
-                      "{EVENT_NAME}",
-                      configuration.getFishingEvents().get(dayOfWeek).getEventTitle())));
+          TextUtility.colorize(
+              configuration.getPrefix()
+                  + configuration
+                      .getNewEventDay()
+                      .replace(
+                          "{EVENT_NAME}",
+                          configuration.getFishingEvents().get(dayOfWeek).getEventTitle())));
     }
   }
 }

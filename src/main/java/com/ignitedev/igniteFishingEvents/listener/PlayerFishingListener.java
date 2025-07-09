@@ -44,6 +44,9 @@ public class PlayerFishingListener implements Listener {
     FishingEvent fishingEvent =
         configuration.getFishingEvents().get(LocalDateTime.now().getDayOfWeek());
 
+    if (fishingEvent == null) {
+      return;
+    }
     if (random.nextDouble() > fishingEvent.getActionChance()) {
       return;
     }
