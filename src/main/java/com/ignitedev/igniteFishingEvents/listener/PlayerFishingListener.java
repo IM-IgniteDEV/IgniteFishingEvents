@@ -1,6 +1,5 @@
 package com.ignitedev.igniteFishingEvents.listener;
 
-import com.ignitedev.aparecium.util.EntityUtility;
 import com.ignitedev.igniteFishingEvents.base.FishingEvent;
 import com.ignitedev.igniteFishingEvents.config.FishingEventsConfiguration;
 import com.ignitedev.igniteFishingEvents.event.CustomFishingRewardEvent;
@@ -9,7 +8,6 @@ import com.ignitedev.igniteFishingEvents.util.CrazyZombieUtility;
 import com.twodevsstudio.simplejsonconfig.interfaces.Autowired;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -27,62 +25,60 @@ public class PlayerFishingListener implements Listener {
 
   @Autowired private static FishingEventsConfiguration configuration;
 
-  private final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+  private final ThreadLocalRandom random = ThreadLocalRandom.current();
   private final PluginManager pluginManager = Bukkit.getPluginManager();
 
   @EventHandler
   public void onFishing(PlayerFishEvent event) {
-    if (event.getState() != PlayerFishEvent.State.CAUGHT_FISH) {
+    if (event.getState() != PlayerFishEvent.State.CAUGHT_FISH || event.getCaught() == null) {
       return;
     }
+    Player player = event.getPlayer();
     Entity caught = event.getCaught();
+    Location location = caught.getLocation();
+    World world = location.getWorld();
 
-    if (caught == null) {
+    if (world == null) {
       return;
     }
     FishingEvent fishingEvent =
         configuration.getFishingEvents().get(LocalDateTime.now().getDayOfWeek());
 
-    if (!(ThreadLocalRandom.current().nextDouble() <= fishingEvent.getActionChance())) {
+    if (random.nextDouble() > fishingEvent.getActionChance()) {
       return;
     }
-    Location location = caught.getLocation();
-    World world = location.getWorld();
-    Player player = event.getPlayer();
+    processFishingReward(player, fishingEvent);
 
-    if (world == null) {
-      return;
+    if (fishingEvent.isMultipleActions()) {
+      processCrazyZombie(player, location, world, fishingEvent);
+      processWaterHook(player, fishingEvent);
     }
-    if (ThreadLocalRandom.current().nextDouble() <= fishingEvent.getItemDropChance()) {
-      ItemStack randomItem = fishingEvent.getWeightedItemDrops().next();
+  }
 
-      player.getInventory().addItem(randomItem);
-      pluginManager.callEvent(new CustomFishingRewardEvent(player, randomItem));
-
-      if (!fishingEvent.isMultipleActions()) {
-        return;
-      }
+  private void processFishingReward(Player player, FishingEvent fishingEvent) {
+    if (random.nextDouble() <= fishingEvent.getItemDropChance()) {
+      ItemStack reward = fishingEvent.getWeightedItemDrops().next();
+      player.getInventory().addItem(reward);
+      pluginManager.callEvent(new CustomFishingRewardEvent(player, reward));
     }
-    if (threadLocalRandom.nextDouble() <= fishingEvent.getCrazyZombieChance()) {
-      Vector from = new Vector(location.getX(), location.getY(), location.getZ());
-      Vector to =
-          new Vector(
-              player.getLocation().getX(),
-              player.getLocation().getY(),
-              player.getLocation().getZ());
-      Vector waterToPlayer = to.subtract(from);
+  }
 
-      CrazyZombieUtility.spawnZombie(
-          player, location, world, waterToPlayer.multiply(configuration.getCrazyZombieHookPower()));
+  private void processCrazyZombie(
+      Player player, Location location, World world, FishingEvent fishingEvent) {
+    if (random.nextDouble() <= fishingEvent.getCrazyZombieChance()) {
+      Vector direction = player.getLocation().toVector().subtract(location.toVector());
+      Vector velocity = direction.multiply(configuration.getCrazyZombieHookPower());
+
+      CrazyZombieUtility.spawnZombie(player, location, world, velocity);
       player.playSound(player.getLocation(), configuration.getCrazyZombieSpawnSound(), 1, 1);
-
-      if (!fishingEvent.isMultipleActions()) {
-        return;
-      }
     }
-    if (ThreadLocalRandom.current().nextDouble() <= fishingEvent.getWaterHookChance()) {
-      player.setVelocity(
-          player.getLocation().getDirection().multiply(configuration.getWaterHookPower()));
+  }
+
+  private void processWaterHook(Player player, FishingEvent fishingEvent) {
+    if (random.nextDouble() <= fishingEvent.getWaterHookChance()) {
+      Vector velocity =
+          player.getLocation().getDirection().multiply(configuration.getWaterHookPower());
+      player.setVelocity(velocity);
       pluginManager.callEvent(new WaterHookEvent(player));
     }
   }
