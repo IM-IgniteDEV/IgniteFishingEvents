@@ -3,6 +3,7 @@ package com.ignitedev.igniteFishingEvents.listener;
 import com.ignitedev.aparecium.util.EntityUtility;
 import com.ignitedev.igniteFishingEvents.base.FishingEvent;
 import com.ignitedev.igniteFishingEvents.config.FishingEventsConfiguration;
+import com.ignitedev.igniteFishingEvents.event.CustomFishingRewardEvent;
 import com.ignitedev.igniteFishingEvents.event.WaterHookEvent;
 import com.ignitedev.igniteFishingEvents.util.CrazyZombieUtility;
 import com.twodevsstudio.simplejsonconfig.interfaces.Autowired;
@@ -56,6 +57,7 @@ public class PlayerFishingListener implements Listener {
       ItemStack randomItem = fishingEvent.getWeightedItemDrops().next();
 
       player.getInventory().addItem(randomItem);
+      pluginManager.callEvent(new CustomFishingRewardEvent(player, randomItem));
 
       if (!fishingEvent.isMultipleActions()) {
         return;
