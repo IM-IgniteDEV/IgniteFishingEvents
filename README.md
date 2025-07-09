@@ -223,17 +223,15 @@ refreshed version but the concept is the same)
 }
 ```
 
----
-
-## API Usage
-
----
-
-## Available API Methods
-
----
-
 ## Events
+
+IgniteFishingEvents exposes several events you can listen to in your plugin:
+
+- `CrazyZombieSpawnEvent` — fired when a crazy zombie is spawned
+- `CustomFishingRewardEvent` — fired when a player catches a fishing reward
+- `SuperOreDestroyEvent` — fired when a super ore is destroyed
+- `SuperOreSpawnEvent` — fired when a super ore is spawned
+- `WaterHookEvent` — fired when a player hooks by water
 
 ---
 
