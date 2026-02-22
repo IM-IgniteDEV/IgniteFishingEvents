@@ -26,19 +26,19 @@ Make fishing finally somehow funny and interesting with powerful events.
 
 ## Commands
 
-- `/feadmin` — Main Command with help message  
+- `/feadmin` - Main Command with help message  
   **Permission:** `ignitefishingevents.admin`
 
 
-- `/feadmin list` — List every day event  
+- `/feadmin list` - List every day event  
   **Permission:** `ignitefishingevents.admin.list`
 
 
-- `/feadmin add <weight> <day for example MONDAY>` — Add item from the main hand to specific day with specific weight  
+- `/feadmin add <weight> <day for example MONDAY>` - Add item from the main hand to specific day with specific weight  
   **Permission:** `ignitefishingevents.admin.add`
 
 
-- `/feadmin reload` — Reloads plugin  
+- `/feadmin reload` - Reloads plugin  
   **Permission:** `ignitefishingevents.admin.reload`
 
 ---
@@ -227,11 +227,11 @@ refreshed version but the concept is the same)
 
 IgniteFishingEvents exposes several events you can listen to in your plugin:
 
-- `CrazyZombieSpawnEvent` — fired when a crazy zombie is spawned
-- `CustomFishingRewardEvent` — fired when a player catches a fishing reward
-- `SuperOreDestroyEvent` — fired when a super ore is destroyed
-- `SuperOreSpawnEvent` — fired when a super ore is spawned
-- `WaterHookEvent` — fired when a player hooks by water
+- `CrazyZombieSpawnEvent` - fired when a crazy zombie is spawned
+- `CustomFishingRewardEvent` - fired when a player catches a fishing reward
+- `SuperOreDestroyEvent` - fired when a super ore is destroyed
+- `SuperOreSpawnEvent` - fired when a super ore is spawned
+- `WaterHookEvent` - fired when a player hooks by water
 
 ---
 
